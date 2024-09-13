@@ -22,7 +22,7 @@ cd /your_path
 **TOKEN должен иметь доступ  repo и delete_repo !!**
 Запуск
 ```sh
-python tz1_saucedemo_expl_wait.py
+python test_api.py
 ```
 
 
