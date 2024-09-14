@@ -2,7 +2,7 @@
 #1. Создание нового публичного репозитория.
 #2. Проверка списка репозиториев для подтверждения создания.
 #3. Удаление репозитория.
-import dotenv.version
+#import dotenv.version
 import requests
 #import json
 import time
@@ -84,6 +84,6 @@ deleteRepo()
 #timeout before control
 time.sleep(20)
 listRepos()
-
+exit()
 
 
