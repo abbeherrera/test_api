@@ -25,7 +25,7 @@ if os.path.exists(dotenv_path):
     load_dotenv(dotenv_path)
 print(dotenv_path)
 
-USERNAME= os.getenv("USERNAME")
+U_NAME= os.getenv("U_NAME")
 TOKEN= os.getenv("TOKEN")
 REPO_NAME=os.getenv("REPO_NAME")
 
@@ -34,9 +34,9 @@ print()
 
 
 PATH_GIT="https://api.github.com"
-PATH_GET=f"{PATH_GIT}/users/{USERNAME}/repos"
+PATH_GET=f"{PATH_GIT}/users/{U_NAME}/repos"
 PATH_POST=f"{PATH_GIT}/user/repos"
-PATH_DEL=f"{PATH_GIT}/repos/{USERNAME}/{REPO_NAME}"
+PATH_DEL=f"{PATH_GIT}/repos/{U_NAME}/{REPO_NAME}"
 
 AUTO=f"Authorization: Bearer {TOKEN}"
 
@@ -44,17 +44,20 @@ AUTO=f"Authorization: Bearer {TOKEN}"
 
 #List of public repository
 def listRepos():
-    response_get = requests.get(PATH_GET ,AUTO,json={"Cache-Control": "no-cache"})
+    response_get = requests.get(PATH_GET, AUTO)
     st_code_lst=response_get.status_code
     print(st_code_lst)
     if st_code_lst==200:
         print("Ok, passed")
     lst_json_response=response_get.json()
     print("repositories: ", len(lst_json_response))
-    dict_json={}
+    
+    dict_json=dict()
     for cnt_url in range(len(lst_json_response)):
         dict_json=lst_json_response[cnt_url]
         print(dict_json["svn_url"],"private=", dict_json["private"] )
+
+    
 #Create repository
 def createRepo():
     #data = { "name": f"{REPO_NAME}", "description": "New repo", "private": false }
@@ -68,7 +71,7 @@ def createRepo():
 #Delete repository
 def deleteRepo():
     
-    response_del=requests.delete(f"{PATH_GIT}/repos/{USERNAME}/{REPO_NAME}",auth=( 'Bearer', TOKEN))
+    response_del=requests.delete(f"{PATH_GIT}/repos/{U_NAME}/{REPO_NAME}",auth=( 'Bearer', TOKEN))
     st_code_delete=response_del.status_code
     print(st_code_delete)
     if st_code_delete==204:
